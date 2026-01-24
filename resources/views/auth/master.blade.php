@@ -46,6 +46,44 @@
     <!-- App JS -->
     <script src="{{ asset('backend/assets/js/app.js') }}"></script>
 
+    <!-- Toast Container -->
+    <div id="toastContainer"
+        class="position-fixed top-0 end-0 p-3"
+        style="z-index: 1055;"></div>
+
+    @if (session('t-error'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const container = document.getElementById('toastContainer');
+                const toastId = 'toast-error-' + Date.now();
+                const toastHtml = `
+                <div id="${toastId}" class="toast align-items-center text-bg-danger border-0 mb-2" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="d-flex">
+                        <div class="toast-body">
+                            {{ session('t-error') }}
+                        </div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                </div>
+            `;
+                container.insertAdjacentHTML('beforeend', toastHtml);
+                const toastElement = document.getElementById(toastId);
+                const bsToast = new bootstrap.Toast(toastElement, {
+                    delay: 5000
+                });
+                bsToast.show();
+            });
+        </script>
+    @endif
+    @foreach (['t-success', 't-error', 't-info', 't-warning'] as $msg)
+        @if (session($msg))
+            <script>
+                showToast('{{ $msg }}', '{{ session($msg) }}');
+            </script>
+        @endif
+    @endforeach
+
+
 </body>
 
 </html>
