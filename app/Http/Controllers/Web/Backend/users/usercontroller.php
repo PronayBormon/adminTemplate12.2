@@ -36,6 +36,13 @@ class usercontroller extends Controller
                         return '<span class="badge bg-danger">Inactive</span>';
                     }
                 })
+                ->addColumn('avatar', function ($row) {
+                    if (!empty($row->avatar)) {
+                        return '<img src="' . asset($row->avatar) . '" style="height:50px;" alt="" class="img-fluid">';
+                    } else {
+                        return '<img src="' . asset('/backend/assets/images/user.webp') . '" style="height:50px;" alt="" class="img-fluid">';
+                    }
+                })
                 ->addColumn('action', function ($row) {
                     return '
                         <a href="' . route('admin.users.edit', $row->id) . '"
@@ -51,7 +58,7 @@ class usercontroller extends Controller
                         </button>
                     ';
                 })
-                ->rawColumns(['action', 'status'])
+                ->rawColumns(['action', 'status', 'avatar'])
 
                 ->make(true);
         }
@@ -78,6 +85,7 @@ class usercontroller extends Controller
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6|confirmed',
             'role' => 'required',
+            'avatar' => 'nullable',
         ]);
 
         User::create([
@@ -85,6 +93,7 @@ class usercontroller extends Controller
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'role' => $request->role,
+            'avatar' => $request->avatar,
         ]);
 
         return redirect()->route('admin.users.index')->with('t-success', 'User created successfully.');
@@ -92,15 +101,17 @@ class usercontroller extends Controller
 
     public function userupdate(Request $request, $id)
     {
+        // dd($request->all());
         $user = User::find($id);
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $user->id,
             'password' => 'nullable|min:6|confirmed',
             'role' => 'required',
+            'avatar' => 'nullable',
         ]);
 
-        $data = $request->only('name', 'email', 'role', 'status');
+        $data = $request->only('name', 'email', 'role', 'avatar');
 
         if ($request->filled('password')) {
             $data['password'] = bcrypt($request->password);

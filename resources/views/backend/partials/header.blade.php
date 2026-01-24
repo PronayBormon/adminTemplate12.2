@@ -4,7 +4,7 @@
                 <div class="d-flex align-items-center gap-2">
 
                     <!-- Brand Logo -->
-                    <a href="index.html"
+                    <a href="/"
                         class="logo">
                         <span class="logo-light">
                             <span class="logo-lg"><img src="/backend/assets/images/logo.png"
@@ -471,12 +471,12 @@
                                 type="button"
                                 aria-haspopup="false"
                                 aria-expanded="false">
-                                <img src="/backend/assets/images/users/avatar-1.jpg"
+                                <img src="{{ asset(auth()->user()->avatar ?? 'backend/assets/images/user.webp') }}"
                                     width="32"
                                     class="rounded-circle me-lg-2 d-flex"
                                     alt="user-image">
                                 <span class="d-lg-flex flex-column gap-1 d-none">
-                                    <h5 class="my-0">Nowak Helme</h5>
+                                    <h5 class="my-0">{{ ucfirst(auth()->user()->name ?? 'No name') }}</h5>
                                 </span>
                                 <i class="ri-arrow-down-s-line d-none d-lg-block align-middle ms-1"></i>
                             </a>
@@ -487,11 +487,11 @@
                                 </div>
 
                                 <!-- item-->
-                                <a href="javascript:void(0);"
+                                {{-- <a href="javascript:void(0);"
                                     class="dropdown-item">
                                     <i class="ri-account-circle-line me-1 fs-16 align-middle"></i>
                                     <span class="align-middle">My Account</span>
-                                </a>
+                                </a> --}}
 
                                 <!-- item-->
                                 {{-- <a href="javascript:void(0);"
@@ -502,7 +502,7 @@
                                 </a> --}}
 
                                 <!-- item-->
-                                <a href="javascript:void(0);"
+                                <a href="{{ route('admin.dashboard.system.settings') }}"
                                     class="dropdown-item">
                                     <i class="ri-settings-2-line me-1 fs-16 align-middle"></i>
                                     <span class="align-middle">Settings</span>

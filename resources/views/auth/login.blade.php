@@ -45,6 +45,12 @@
         </div>
     </form>
 </x-guest-layout> --}}
+<?php
+
+use App\Models\SystemSetting;
+
+$system = SystemSetting::first();
+?>
 
 @extends('auth.master')
 @section('content')
@@ -54,12 +60,15 @@
             <!-- Logo -->
             <a href="{{ url('/') }}"
                 class="auth-brand d-flex justify-content-center mb-3">
-                <img src="{{ asset('backend/assets/images/logo-dark.png') }}"
+                <img src="{{ asset($system->dark_logo ?? 'backend/assets/images/logo-dark.png') }}"
+                    style="min-height: 80px; width:auto"
                     height="26"
                     class="logo-dark">
-                <img src="{{ asset('backend/assets/images/logo.png') }}"
+                <img src="{{ asset($system->dark_logo ?? 'backend/assets/images/logo.png') }}"
+                    style="min-height: 80px; width:auto"
                     height="26"
                     class="logo-light">
+
             </a>
 
             <div class="card overflow-hidden p-xxl-4 p-3 mb-0">

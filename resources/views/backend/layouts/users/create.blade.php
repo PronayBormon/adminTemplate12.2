@@ -19,13 +19,22 @@
                     </div>
 
                     <div class="card-body">
+
+                        {{-- GLOBAL ERRORS --}}
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <strong>Please fix the errors below.</strong>
+                            </div>
+                        @endif
+
                         <form method="POST"
-                            action="{{ route('admin.users.store') }}">
+                            action="{{ route('admin.users.store') }}"
+                            enctype="multipart/form-data">
                             @csrf
 
                             <div class="row g-3">
 
-                                <!-- Name -->
+                                {{-- Name --}}
                                 <div class="col-md-6">
                                     <label class="form-label">Name</label>
                                     <input type="text"
@@ -38,7 +47,7 @@
                                     @enderror
                                 </div>
 
-                                <!-- Email -->
+                                {{-- Email --}}
                                 <div class="col-md-6">
                                     <label class="form-label">Email</label>
                                     <input type="email"
@@ -51,7 +60,7 @@
                                     @enderror
                                 </div>
 
-                                <!-- Password -->
+                                {{-- Password --}}
                                 <div class="col-md-6">
                                     <label class="form-label">Password</label>
                                     <input type="password"
@@ -63,7 +72,7 @@
                                     @enderror
                                 </div>
 
-                                <!-- Confirm Password -->
+                                {{-- Confirm Password --}}
                                 <div class="col-md-6">
                                     <label class="form-label">Confirm Password</label>
                                     <input type="password"
@@ -72,35 +81,45 @@
                                         placeholder="Confirm password">
                                 </div>
 
-                                <!-- Role -->
+                                {{-- Role --}}
                                 <div class="col-md-6">
                                     <label class="form-label">Role</label>
                                     <select name="role"
                                         class="form-select @error('role') is-invalid @enderror">
                                         <option value="">Select Role</option>
-                                        <option value="admin">Admin</option>
-                                        <option value="user">User</option>
+                                        <option value="admin"
+                                            {{ old('role') == 'admin' ? 'selected' : '' }}>
+                                            Admin
+                                        </option>
+                                        <option value="user"
+                                            {{ old('role') == 'user' ? 'selected' : '' }}>
+                                            User
+                                        </option>
                                     </select>
                                     @error('role')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
 
-                                <!-- Status -->
+                                {{-- Avatar Upload --}}
                                 <div class="col-md-6">
-                                    <label class="form-label">Status</label>
-                                    <select name="status"
-                                        class="form-select @error('status') is-invalid @enderror">
-                                        <option value="1">Active</option>
-                                        <option value="0">Inactive</option>
-                                    </select>
-                                    @error('status')
+                                    <label class="form-label">Avatar</label>
+                                    {{-- <input type="file"
+                                        name="avatar"
+                                        class="form-control @error('avatar') is-invalid @enderror"
+                                        accept="image/*"> --}}
+                                    <x-chunk-upload name="avatar"
+                                        label="Avatar"/>
+                                    @error('avatar')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
+                                    <small class="text-muted">
+                                        JPG, PNG, WEBP • Max 2MB
+                                    </small>
                                 </div>
 
-                                <!-- Submit -->
-                                <div class="col-12 text-end">
+                                {{-- Submit --}}
+                                <div class="col-12 text-end mt-3">
                                     <button type="submit"
                                         class="btn btn-primary">
                                         Create User

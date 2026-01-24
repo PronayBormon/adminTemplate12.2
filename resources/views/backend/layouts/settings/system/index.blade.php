@@ -3,8 +3,9 @@
 @push('title')
     System Settings
 @endpush
+
 @push('styles')
-    <!-- dropzone css -->
+    <!-- Dropzone css -->
     <link rel="stylesheet"
         href="/backend/assets/vendor/dropzone/dropzone.css"
         type="text/css" />
@@ -21,6 +22,19 @@
                     </div>
 
                     <div class="card-body">
+
+                        {{-- GLOBAL ERROR MESSAGE --}}
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <strong>Please fix the following errors:</strong>
+                                <ul class="mb-0 mt-2">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
                         <form action="{{ route('admin.dashboard.system.settings.update') }}"
                             method="POST"
                             enctype="multipart/form-data">
@@ -32,52 +46,77 @@
 
                                     <h5 class="mb-3">Basic Information</h5>
 
+                                    {{-- Site Name --}}
                                     <div class="mb-3">
                                         <label class="form-label">Site Name</label>
                                         <input type="text"
                                             name="site_name"
-                                            class="form-control"
+                                            class="form-control @error('site_name') is-invalid @enderror"
                                             value="{{ old('site_name', $data->site_name) }}">
+                                        @error('site_name')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
 
+                                    {{-- Site Tagline --}}
                                     <div class="mb-3">
                                         <label class="form-label">Site Tagline</label>
                                         <input type="text"
                                             name="site_tagline"
-                                            class="form-control"
+                                            class="form-control @error('site_tagline') is-invalid @enderror"
                                             value="{{ old('site_tagline', $data->site_tagline) }}">
+                                        @error('site_tagline')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
 
+                                    {{-- Contact Email --}}
                                     <div class="mb-3">
                                         <label class="form-label">Contact Email</label>
                                         <input type="email"
                                             name="contact_email"
-                                            class="form-control"
+                                            class="form-control @error('contact_email') is-invalid @enderror"
                                             value="{{ old('contact_email', $data->contact_email) }}">
+                                        @error('contact_email')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
 
+                                    {{-- Support Email --}}
                                     <div class="mb-3">
                                         <label class="form-label">Support Email</label>
                                         <input type="email"
                                             name="support_email"
-                                            class="form-control"
+                                            class="form-control @error('support_email') is-invalid @enderror"
                                             value="{{ old('support_email', $data->support_email) }}">
+                                        @error('support_email')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
 
+                                    {{-- Phone --}}
                                     <div class="mb-3">
                                         <label class="form-label">Phone</label>
                                         <input type="text"
                                             name="phone"
-                                            class="form-control"
+                                            class="form-control @error('phone') is-invalid @enderror"
                                             value="{{ old('phone', $data->phone) }}">
+                                        @error('phone')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
 
+                                    {{-- Address --}}
                                     <div class="mb-3">
                                         <label class="form-label">Address</label>
                                         <textarea name="address"
-                                            class="form-control"
-                                            rows="3">{{ old('address', $data->address) }}</textarea>
+                                            rows="3"
+                                            class="form-control @error('address') is-invalid @enderror">{{ old('address', $data->address) }}</textarea>
+                                        @error('address')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
+
                                 </div>
 
                                 {{-- RIGHT COLUMN --}}
@@ -86,59 +125,24 @@
                                     <h5 class="mb-3">Branding</h5>
 
                                     {{-- Light Logo --}}
-                                    <x-chunk-upload name="logo"
-                                        label="Light Logo"
-                                        :value="$data->logo" />
+                                    <div class="mb-3">
+                                        <x-chunk-upload name="logo"
+                                            label="Favicon"
+                                            :value="$data->logo" />
+                                        @error('logo')
+                                            <div class="text-danger small mt-1">{{ $message }}</div>
+                                        @enderror
+                                    </div>
 
                                     {{-- Dark Logo --}}
-                                    <x-chunk-upload name="dark_logo"
-                                        label="Dark Logo"
-                                        :value="$data->dark_logo" />
-
-                                    {{-- <div class="mb-3">
-                                        <label class="form-label">Primary Color</label>
-                                        <input type="color"
-                                            name="primary_color"
-                                            class="form-control form-control-color"
-                                            value="{{ $data->primary_color }}">
-                                    </div>
-
                                     <div class="mb-3">
-                                        <label class="form-label">Secondary Color</label>
-                                        <input type="color"
-                                            name="secondary_color"
-                                            class="form-control form-control-color"
-                                            value="{{ $data->secondary_color }}">
+                                        <x-chunk-upload name="dark_logo"
+                                            label="Logo"
+                                            :value="$data->dark_logo" />
+                                        @error('dark_logo')
+                                            <div class="text-danger small mt-1">{{ $message }}</div>
+                                        @enderror
                                     </div>
-
-                                    <h5 class="mt-4 mb-3">System Controls</h5>
-
-                                    <div class="form-check form-switch mb-2">
-                                        <input class="form-check-input"
-                                            type="checkbox"
-                                            name="maintenance_mode"
-                                            value="1"
-                                            {{ $data->maintenance_mode ? 'checked' : '' }}>
-                                        <label class="form-check-label">Maintenance Mode</label>
-                                    </div>
-
-                                    <div class="form-check form-switch mb-2">
-                                        <input class="form-check-input"
-                                            type="checkbox"
-                                            name="allow_registration"
-                                            value="1"
-                                            {{ $data->allow_registration ? 'checked' : '' }}>
-                                        <label class="form-check-label">Allow Registration</label>
-                                    </div>
-
-                                    <div class="form-check form-switch mb-2">
-                                        <input class="form-check-input"
-                                            type="checkbox"
-                                            name="email_verification"
-                                            value="1"
-                                            {{ $data->email_verification ? 'checked' : '' }}>
-                                        <label class="form-check-label">Email Verification</label>
-                                    </div> --}}
 
                                 </div>
                             </div>
@@ -158,5 +162,6 @@
         </div>
     </div>
 @endsection
+
 @push('script')
 @endpush

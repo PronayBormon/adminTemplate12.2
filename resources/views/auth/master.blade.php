@@ -1,62 +1,71 @@
-<!DOCTYPE html>
-<html lang="en"
-    data-layout="">
+       <?php
 
-<head>
-    <meta charset="utf-8" />
-    <title>Log In | Welcome to website</title>
+        use App\Models\SystemSetting;
 
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="Login page">
-    <meta name="author"
-        content="Coderthemes">
+        $system = SystemSetting::first();
+        ?>
 
-    <!-- Favicon -->
-    <link rel="shortcut icon"
-        href="{{ asset('backend/assets/images/favicon.ico') }}">
 
-    <!-- Theme Config -->
-    <script src="{{ asset('backend/assets/js/config.js') }}"></script>
+       <!DOCTYPE html>
+       <html lang="en"
+           data-layout="">
 
-    <!-- Vendor CSS -->
-    <link href="{{ asset('backend/assets/css/vendor.min.css') }}"
-        rel="stylesheet" />
+       <head>
+           <meta charset="utf-8" />
+           <title>Log In | Welcome to website</title>
 
-    <!-- App CSS -->
-    <link href="{{ asset('backend/assets/css/app.min.css') }}"
-        rel="stylesheet"
-        id="app-style" />
+           <meta name="viewport"
+               content="width=device-width, initial-scale=1.0">
+           <meta name="description"
+               content="Login page">
+           <meta name="author"
+               content="Coderthemes">
 
-    <!-- Icons -->
-    <link href="{{ asset('backend/assets/css/icons.min.css') }}"
-        rel="stylesheet" />
-</head>
+           <!-- App favicon -->
+           <link rel="shortcut icon"
+               href="{{ asset($system->logo) }}">
+           @include('backend.partials.styles')
 
-<body>
+           <!-- Theme Config -->
+           <script src="{{ asset('backend/assets/js/config.js') }}"></script>
 
-    <div class="auth-bg d-flex min-vh-100">
-        @yield('content')
-    </div>
+           <!-- Vendor CSS -->
+           <link href="{{ asset('backend/assets/css/vendor.min.css') }}"
+               rel="stylesheet" />
 
-    <!-- Vendor JS -->
-    <script src="{{ asset('backend/assets/js/vendor.min.js') }}"></script>
+           <!-- App CSS -->
+           <link href="{{ asset('backend/assets/css/app.min.css') }}"
+               rel="stylesheet"
+               id="app-style" />
 
-    <!-- App JS -->
-    <script src="{{ asset('backend/assets/js/app.js') }}"></script>
+           <!-- Icons -->
+           <link href="{{ asset('backend/assets/css/icons.min.css') }}"
+               rel="stylesheet" />
+       </head>
 
-    <!-- Toast Container -->
-    <div id="toastContainer"
-        class="position-fixed top-0 end-0 p-3"
-        style="z-index: 1055;"></div>
+       <body>
 
-    @if (session('t-error'))
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const container = document.getElementById('toastContainer');
-                const toastId = 'toast-error-' + Date.now();
-                const toastHtml = `
+           <div class="auth-bg d-flex min-vh-100">
+               @yield('content')
+           </div>
+
+           <!-- Vendor JS -->
+           <script src="{{ asset('backend/assets/js/vendor.min.js') }}"></script>
+
+           <!-- App JS -->
+           <script src="{{ asset('backend/assets/js/app.js') }}"></script>
+
+           <!-- Toast Container -->
+           <div id="toastContainer"
+               class="position-fixed top-0 end-0 p-3"
+               style="z-index: 1055;"></div>
+
+           @if (session('t-error'))
+           <script>
+               document.addEventListener('DOMContentLoaded', function() {
+                   const container = document.getElementById('toastContainer');
+                   const toastId = 'toast-error-' + Date.now();
+                   const toastHtml = `
                 <div id="${toastId}" class="toast align-items-center text-bg-danger border-0 mb-2" role="alert" aria-live="assertive" aria-atomic="true">
                     <div class="d-flex">
                         <div class="toast-body">
@@ -66,24 +75,24 @@
                     </div>
                 </div>
             `;
-                container.insertAdjacentHTML('beforeend', toastHtml);
-                const toastElement = document.getElementById(toastId);
-                const bsToast = new bootstrap.Toast(toastElement, {
-                    delay: 5000
-                });
-                bsToast.show();
-            });
-        </script>
-    @endif
-    @foreach (['t-success', 't-error', 't-info', 't-warning'] as $msg)
-        @if (session($msg))
-            <script>
-                showToast('{{ $msg }}', '{{ session($msg) }}');
-            </script>
-        @endif
-    @endforeach
+                   container.insertAdjacentHTML('beforeend', toastHtml);
+                   const toastElement = document.getElementById(toastId);
+                   const bsToast = new bootstrap.Toast(toastElement, {
+                       delay: 5000
+                   });
+                   bsToast.show();
+               });
+           </script>
+           @endif
+           @foreach (['t-success', 't-error', 't-info', 't-warning'] as $msg)
+           @if (session($msg))
+           <script>
+               showToast('{{ $msg }}', '{{ session($msg) }}');
+           </script>
+           @endif
+           @endforeach
 
 
-</body>
+       </body>
 
-</html>
+       </html>

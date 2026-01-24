@@ -57,6 +57,7 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
+                                        <th>Avatar</th>
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Role</th>
@@ -126,6 +127,10 @@
                 columns: [{
                         data: 'id',
                         name: 'id'
+                    },
+                    {
+                        data: 'avatar',
+                        name: 'avatar'
                     },
                     {
                         data: 'name',

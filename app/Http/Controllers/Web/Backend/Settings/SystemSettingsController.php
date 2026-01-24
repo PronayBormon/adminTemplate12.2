@@ -70,12 +70,12 @@ class SystemSettingsController extends Controller
             'site_tagline'       => 'nullable|string|max:255',
             'contact_email'      => 'required|email',
             'support_email'      => 'nullable|email',
-            'phone'              => 'nullable|string|max:50',
-            'address'            => 'nullable|string',
+            'phone'              => 'required|string|max:50',
+            'address'            => 'required|string',
 
             // chunk upload paths (STRING, not file)
-            'logo'               => 'nullable|string',
-            'dark_logo'          => 'nullable|string',
+            'logo'               => 'required|string',
+            'dark_logo'          => 'required|string',
 
             // 'primary_color'      => 'nullable|string',
             // 'secondary_color'    => 'nullable|string',
