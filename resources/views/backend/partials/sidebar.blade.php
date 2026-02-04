@@ -11,25 +11,26 @@
                class="logo">
                <span class="logo-light">
                    <span class="logo-lg">
-                       <img style="height: auto; max-height: 69px; width: auto; "
-                           src="{{ $system->logo ? asset($system->logo) : asset('/backend/assets/images/logo.png') }}"
+                       <img style="height: auto; max-height: 60px; width: auto; "
+                           src="{{ asset($system->logo ?? '/backend/assets/images/logo-dark.png') }}"
                            alt="logo"></span>
-                   {{-- <span class="logo-sm"><img style="
+                   <span class="logo-sm"><img
+                           style="
                         height: auto;
                         max-height: 69px;
                         width: auto;
                     "
-                           src="{{ $system->dark_logo ? asset($system->dark_logo) : asset('/backend/assets/images/logo.png') }}"
-                           alt="small logo"></span> --}}
+                           src="{{ asset($system->dark_logo ?? '/backend/assets/images/logo-dark.png') }}"
+                           alt="small logo"></span>
                </span>
 
                <span class="logo-dark">
-                   <span class="logo-lg"><img style="height: auto; max-height: 69px; width: auto; "
-                           src="{{ $system->dark_logo ? asset($system->dark_logo) : asset('/backend/assets/images/logo-dark.png') }}"
+                   <span class="logo-lg"><img style="height: auto; max-height: 60px; width: auto; "
+                           src="{{ asset($system->dark_logo ?? '/backend/assets/images/logo-dark.png') }}"
                            alt="dark logo"></span>
-                   {{-- <span class="logo-sm"><img
-                           src="{{ $system->dark_logo ? asset($system->dark_logo) : asset('/backend/assets/images/logo-dark.png') }}"
-                           alt="small logo"></span> --}}
+                   <span class="logo-sm"><img
+                           src="{{ asset($system->dark_logo ?? '/backend/assets/images/logo-dark.png') }}"
+                           alt="small logo"></span>
                </span>
            </a>
 
@@ -164,6 +165,13 @@
                        </div>
                    </li>
                    <li class="side-nav-item">
+                       <a href="{{ route('admin.faq.index') }}"
+                           class="side-nav-link">
+                           <span class="menu-icon"><i class="ti ti-file"></i></span>
+                           <span class="menu-text"> FAQ's </span>
+                       </a>
+                   </li>
+                   <li class="side-nav-item">
                        <a href="{{ route('admin.pages.index') }}"
                            class="side-nav-link">
                            <span class="menu-icon"><i class="ti ti-file"></i></span>
@@ -195,6 +203,21 @@
                                    <a href="{{ route('admin.dashboard.system.settings') }}"
                                        target=""
                                        class="side-nav-link">System Settings</a>
+                               </li>
+                               <li class="side-nav-item">
+                                   <a href="{{ route('admin.credentials.edit', 'smtp') }}"
+                                       target=""
+                                       class="side-nav-link">SMTP Settings</a>
+                               </li>
+                               <li class="side-nav-item">
+                                   <a href="{{ route('admin.credentials.edit', 'stripe') }}"
+                                       target=""
+                                       class="side-nav-link">Stripe Settings</a>
+                               </li>
+                               <li class="side-nav-item">
+                                   <a href="{{ route('admin.credentials.edit', 'paypal') }}"
+                                       target=""
+                                       class="side-nav-link">Paypal Settings</a>
                                </li>
                            </ul>
                        </div>

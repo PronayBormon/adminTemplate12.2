@@ -38,9 +38,9 @@ class usercontroller extends Controller
                 })
                 ->addColumn('avatar', function ($row) {
                     if (!empty($row->avatar)) {
-                        return '<img src="' . asset($row->avatar) . '" style="height:50px;" alt="" class="img-fluid">';
+                        return '<img src="' . asset($row->avatar) . '" style="    height: 50px; background: red; width: 50px; object-fit: cover; " alt="" class="img-fluid rounded-circle">';
                     } else {
-                        return '<img src="' . asset('/backend/assets/images/user.webp') . '" style="height:50px;" alt="" class="img-fluid">';
+                        return '<img src="' . asset('/backend/assets/images/user.webp') . '" style="    height: 50px; width: 50px; object-fit: cover;" alt="" class="img-fluid rounded-circle">';
                     }
                 })
                 ->addColumn('action', function ($row) {

@@ -23,7 +23,7 @@
 
            <!-- App favicon -->
            <link rel="shortcut icon"
-               href="{{ asset($system->logo) }}">
+               href="{{ asset($system->logo ?? '') }}">
            @include('backend.partials.styles')
        </head>
 

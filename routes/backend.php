@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\Web\Backend\Credentials\CredentialsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\Backend\UploadController;
 use App\Http\Controllers\Web\Backend\DashboardController;
+use App\Http\Controllers\Web\Backend\FAQ\FAQController;
 use App\Http\Controllers\Web\Backend\Pages\DynamicPagesController;
 use App\Http\Controllers\Web\Backend\Settings\SystemSettingsController;
 use App\Http\Controllers\Web\Backend\users\usercontroller;
@@ -36,4 +38,24 @@ Route::prefix('admin')->middleware('auth:sanctum', 'admin')->group(function () {
         Route::get('edit/{id}', 'useredit')->name('admin.users.edit');
         Route::put('update/{id}', 'userupdate')->name('admin.users.update');
     });
+
+    Route::controller(CredentialsController::class)->prefix('credentials')->group(function () {
+        Route::get('/{service}/edit', 'edit')->name('admin.credentials.edit');
+        Route::put('/{service}', 'update')->name('admin.credentials.update');
+    });
+
+    Route::controller(FAQController::class)
+        ->prefix('faq')
+        ->name('admin.faq.')
+        ->group(function () {
+
+            Route::get('/', 'index')->name('index');
+            Route::get('/create', 'create')->name('create');
+            Route::post('/store', 'store')->name('store');
+
+            Route::get('/edit/{faq}', 'edit')->name('edit');
+            Route::put('/update/{faq}', 'update')->name('update');
+
+            Route::delete('/delete/{faq}', 'destroy')->name('delete');
+        });
 });

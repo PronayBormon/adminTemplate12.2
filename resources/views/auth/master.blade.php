@@ -5,7 +5,6 @@
         $system = SystemSetting::first();
         ?>
 
-
        <!DOCTYPE html>
        <html lang="en"
            data-layout="">
@@ -23,7 +22,7 @@
 
            <!-- App favicon -->
            <link rel="shortcut icon"
-               href="{{ asset($system->logo) }}">
+               href="{{ asset($system->logo ?? '') }}">
            @include('backend.partials.styles')
 
            <!-- Theme Config -->
@@ -95,4 +94,4 @@
 
        </body>
 
-       </html>
+       </html>  
