@@ -13,4 +13,8 @@ Route::prefix('auth')->controller(AuthenticationApiController::class)->group(fun
     Route::post('register', 'register');
     Route::post('register/verify', 'verifyOtp');
     Route::post('login', 'login');
+    Route::post('forget/password', 'forgotPassword');
+    Route::post('forget/verify', 'verifyForgotOtp');
+    Route::post('forget/password/update', 'resetPassword');
+    Route::post('resend', 'resendOtp');
 });
