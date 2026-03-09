@@ -23,8 +23,8 @@ class FAQController extends Controller
                 )
                 ->addColumn('action', function ($row) {
                     return '
-                        <a href="' . route('admin.faq.edit', $row->id) . '" class="btn btn-sm btn-primary">Edit</a>
-                        <button data-id="' . $row->id . '" class="btn btn-sm btn-danger delete-faq">Delete</button>
+                        <a href="' . route('admin.faq.edit', $row->id) . '" class="btn btn-sm btn-outline-primary me-1"><i class="ti ti-pencil"></i></a>
+                        <button data-id="' . $row->id . '" class="btn btn-sm btn-outline-danger delete-faq"><i class="ti ti-trash"></i></button>
                     ';
                 })
                 ->rawColumns(['is_active', 'action'])
@@ -68,7 +68,7 @@ class FAQController extends Controller
         $faq->update($request->only('question', 'answer', 'is_active'));
 
         return redirect()
-            ->route('admin.layouts.faq.index')
+            ->route('admin.faq.index')
             ->with('success', 'FAQ updated successfully');
     }
 

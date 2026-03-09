@@ -167,7 +167,7 @@
                    <li class="side-nav-item">
                        <a href="{{ route('admin.faq.index') }}"
                            class="side-nav-link">
-                           <span class="menu-icon"><i class="ti ti-file"></i></span>
+                           <span class="menu-icon"><i class="ri-question-line"></i></span>
                            <span class="menu-text"> FAQ's </span>
                        </a>
                    </li>
@@ -223,7 +223,7 @@
                        </div>
                    </li>
 
-                   <li class="side-nav-item">
+                   {{-- <li class="side-nav-item">
                        <a href="apps-chat.html"
                            class="side-nav-link">
                            <span class="menu-icon"><i class="ti ti-message"></i></span>
@@ -1225,7 +1225,7 @@
                                </li>
                            </ul>
                        </div>
-                   </li>
+                   </li> --}}
                </ul>
 
                <!-- Help Box -->

@@ -20,6 +20,7 @@
                         <tr>
                             <th>#</th>
                             <th>Question</th>
+                            <th>Answer</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -44,6 +45,9 @@
                     },
                     {
                         data: 'question'
+                    },
+                    {
+                        data: 'answer'
                     },
                     {
                         data: 'is_active',
